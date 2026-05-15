@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"invent/back/internal/api"
 	"invent/back/internal/db"
 	"log"
@@ -16,25 +17,40 @@ func main() {
 	defer db.DB.Close()
 
 	mux := mux.NewRouter()
-	//r := mux.NewRouter()
 	mux.Use(corsMiddleware)
 
-	mux.HandleFunc("/api/categories", api.IssuesCategoriesRequest).Methods("GET", "OPTIONS")
-	mux.HandleFunc("/api/categories/{id}", api.IssuesCategoriesRequestById).Methods("GET", "OPTIONS")
-	mux.HandleFunc("/api/goods", api.IssuesGoodsRequest).Methods("GET", "OPTIONS")
-	mux.HandleFunc("/api/goods/{id}", api.IssuesGoodsRequestById).Methods("GET", "OPTIONS")
+	// Статические файлы (frontend)
+	//mux.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("../front"))))
+	//mux.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir("./front/"))))
+	// API endpoints for categories
 
-	err := http.ListenAndServe(":8080", mux) // поднятие сервера
+	mux.HandleFunc("/api/categories", api.IssuesCategoriesRequest).Methods("GET", "POST", "OPTIONS")
+	mux.HandleFunc("/api/categories/{id}", api.IssuesCategoriesRequestById).Methods("GET", "PUT", "DELETE", "OPTIONS")
+
+	// API endpoints for goods
+	mux.HandleFunc("/api/goods", api.IssuesGoodsRequest).Methods("GET", "POST", "OPTIONS")
+	mux.HandleFunc("/api/goods/{id}", api.IssuesGoodsRequestById).Methods("GET", "PUT", "DELETE", "OPTIONS")
+
+	// mux.PathPrefix("/").Handler(http.FileServer(http.Dir("./front")))
+	mux.HandleFunc("/", home)
+	mux.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./front/"))))
+	log.Println("Server starting on http://localhost:8080")
+	log.Println("Frontend available at: http://localhost:8080/")
+	log.Println("API available at: http://localhost:8080/api/")
+
+	err := http.ListenAndServe(":8080", mux)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func ins(w http.ResponseWriter, r *http.Request) {}
+func home(w http.ResponseWriter, r *http.Request) {
+	Tmpl, _ := template.ParseFiles("./front/index.html")
+	Tmpl.Execute(w, nil)
+}
 
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Для production лучше указывать конкретный origin
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -46,17 +62,3 @@ func corsMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
-
-//func IssuesHandler(w http.ResponseWriter, r *http.Request) {
-// 	origin := r.Header.Get("Origin")
-// 	if origin == "https://trusted.com" {
-// 		w.Header().Set("Access-Control-Allow-Origin", origin)
-// 	}
-// 	w.Header().Set("Access-Control-Allow-Credentials", "true") // если нужны куки
-// 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-// 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-// 	if r.Method == http.MethodOptions {
-// 		w.WriteHeader(http.StatusNoContent)
-// 		return
-// 	}
-// }

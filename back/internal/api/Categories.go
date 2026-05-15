@@ -84,7 +84,7 @@ func UpdateCategory(id int, name string, db *sql.DB) (*Category, error) {
 	return &cat, nil
 }
 
-func DeleteCategory(id string, db *sql.DB) error {
+func DeleteCategory(id int, db *sql.DB) error {
 	_, err := db.Exec("DELETE FROM categories WHERE id = $1", id)
 	return err
 }

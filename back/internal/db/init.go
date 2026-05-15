@@ -77,7 +77,7 @@ func createTables() {
 	categories := `
 	CREATE TABLE IF NOT EXISTS categories(
 		id SERIAL PRIMARY KEY,
-		name VARCHAR(255) UNIQUE NOT NULL,
+		name VARCHAR(255) UNIQUE NOT NULL
 	);
 	`
 	_, err := DB.Exec(goods)

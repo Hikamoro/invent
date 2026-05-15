@@ -1,5 +1,5 @@
-// Базовые URL для API
-const API_BASE_URL = 'http://localhost:8080';
+// Базовые URL для API - автоматическое определение текущего хоста
+const API_BASE_URL = `${window.location.origin}`;
 
 // Элементы DOM
 const selectCategoryBtn = document.getElementById('selectCategoryBtn');
