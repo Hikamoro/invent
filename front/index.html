@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инвентаризация</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Система инвентаризации</h1>
+        
+        <div class="button-group">
+            <button id="selectCategoryBtn" class="btn primary">
+                Выбрать категорию
+            </button>
+            <button id="createCategoryBtn" class="btn success">
+                Создать новую категорию
+            </button>
+            <button id="deleteCategoryBtn" class="btn danger">
+                Удалить категорию
+            </button>
+        </div>
+
+        <!-- Выпадающий список категорий -->
+        <div id="categoryDropdown" class="dropdown" style="display: none;">
+            <div class="dropdown-header">
+                <span>Категории</span>
+                <button id="closeDropdown" class="close-btn">&times;</button>
+            </div>
+            <div id="categoryList" class="category-list">
+                <!-- Категории будут загружены сюда -->
+            </div>
+        </div>
+
+        <!-- Модальное окно создания категории -->
+        <div id="createModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Создать новую категорию</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="categoryName">Название категории:</label>
+                        <input type="text" id="categoryName" placeholder="Введите название категории">
+                    </div>
+                    <div class="form-actions">
+                        <button id="createCategorySubmit" class="btn success">Создать</button>
+                        <button id="createCategoryCancel" class="btn secondary">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно удаления категории -->
+        <div id="deleteModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Удалить категорию</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="deleteCategorySelect">Выберите категорию для удаления:</label>
+                        <select id="deleteCategorySelect">
+                            <option value="">-- Выберите категорию --</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button id="deleteCategorySubmit" class="btn danger">Удалить</button>
+                        <button id="deleteCategoryCancel" class="btn secondary">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notification" class="notification" style="display: none;">
+            <span id="notificationText"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
