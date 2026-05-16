@@ -129,11 +129,32 @@ func IssuesGoodsRequest(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case http.MethodGet:
+		// Получаем все товары
 		goods, err := GetGoods(db.DB)
 		if err != nil {
 			http.Error(w, "unable to get goods: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
+		
+		// Фильтруем по category_id если передан параметр
+		categoryIdStr := r.URL.Query().Get("category_id")
+		if categoryIdStr != "" {
+			categoryId, err := strconv.Atoi(categoryIdStr)
+			if err != nil {
+				http.Error(w, "invalid category_id format", http.StatusBadRequest)
+				return
+			}
+			
+			// Фильтруем товары по категории
+			var filteredGoods []Goods
+			for _, good := range goods {
+				if good.CategoryID == categoryId {
+					filteredGoods = append(filteredGoods, good)
+				}
+			}
+			goods = filteredGoods
+		}
+		
 		json.NewEncoder(w).Encode(goods)
 
 	case http.MethodPost:
