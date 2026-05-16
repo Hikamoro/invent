@@ -1,0 +1,299 @@
+/* Стили для страницы товаров */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.8em;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+/* Таблица товаров */
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.goods-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.goods-table th {
+    background-color: #34495e;
+    color: white;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.goods-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.goods-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.goods-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1;
+    vertical-align: top;
+    line-height: 1.4;
+}
+
+.goods-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.goods-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.goods-table td:nth-child(5) {
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+/* Кнопки в таблице */
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+.action-btn.edit {
+    background-color: #3498db;
+    color: white;
+}
+
+.action-btn.edit:hover {
+    background-color: #2980b9;
+}
+
+.action-btn.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.action-btn.delete:hover {
+    background-color: #c0392b;
+}
+
+/* Адаптивность для таблицы */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .controls {
+        justify-content: center;
+    }
+    
+    .goods-table {
+        font-size: 12px;
+    }
+    
+    .goods-table th,
+    .goods-table td {
+        padding: 8px 6px;
+    }
+    
+    .goods-table td:nth-child(5) {
+        max-width: 150px;
+    }
+}
+
+/* Стили для textarea */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ecf0f1;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 300;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn.primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: #2980b9;
+}
+
+.btn.success {
+    background-color: #27ae60;
+    color: white;
+}
+
+.btn.success:hover {
+    background-color: #229954;
+}
+
+.btn.danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn.danger:hover {
+    background-color: #c0392b;
+}
+
+.btn.secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn.secondary:hover {
+    background-color: #7f8c8d;
+}
+
+/* Выпадающий список */
+.dropdown {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dropdown-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+.dropdown-header span {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #7f8c8d;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #ecf0f1;
+}
+
+.category-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.category-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

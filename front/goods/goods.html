@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товары категории</title>
+    <link rel="stylesheet" href="/goods/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="categoryTitle">Товары категории</h1>
+            <button id="backToCategories" class="btn secondary">← Назад к категориям</button>
+        </div>
+
+        <div class="controls">
+            <button id="createGoodsBtn" class="btn success">Создать новый товар</button>
+            <button id="deleteGoodsBtn" class="btn danger">Удалить товар</button>
+            <button id="editGoodsBtn" class="btn primary">Редактировать товар</button>
+        </div>
+
+        <!-- Таблица товаров -->
+        <div class="table-container">
+            <table id="goodsTable" class="goods-table">
+                <thead>
+                    <tr>
+                        <th>ID товара</th>
+                        <th>Имя товара</th>
+                        <th>Единица измерения</th>
+                        <th>Количество товара</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody id="goodsTableBody">
+                    <!-- Товары будут загружены сюда -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Модальное окно создания товара -->
+        <div id="createGoodsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Создать новый товар</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="createGoodsForm">
+                        <div class="form-group">
+                            <label for="goodsName">Название товара:</label>
+                            <input type="text" id="goodsName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsUnit">Единица измерения:</label>
+                            <input type="text" id="goodsUnit" name="unit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsQuantity">Количество:</label>
+                            <input type="number" id="goodsQuantity" name="quantity" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsDescription">Описание:</label>
+                            <textarea id="goodsDescription" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn success">Создать</button>
+                            <button type="button" class="btn secondary" id="createGoodsCancel">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно удаления товара -->
+        <div id="deleteGoodsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Удалить товар</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="deleteGoodsSelect">Выберите товар для удаления:</label>
+                        <select id="deleteGoodsSelect" required>
+                            <option value="">-- Выберите товар --</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button id="deleteGoodsSubmit" class="btn danger">Удалить</button>
+                        <button id="deleteGoodsCancel" class="btn secondary">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно редактирования товара -->
+        <div id="editGoodsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Редактировать товар</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="editGoodsForm">
+                        <input type="hidden" id="editGoodsId" name="id">
+                        <div class="form-group">
+                            <label for="editGoodsName">Название товара:</label>
+                            <input type="text" id="editGoodsName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGoodsUnit">Единица измерения:</label>
+                            <input type="text" id="editGoodsUnit" name="unit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGoodsQuantity">Количество:</label>
+                            <input type="number" id="editGoodsQuantity" name="quantity" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGoodsDescription">Описание:</label>
+                            <textarea id="editGoodsDescription" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn primary">Сохранить изменения</button>
+                            <button type="button" class="btn secondary" id="editGoodsCancel">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notification" class="notification" style="display: none;">
+            <span id="notificationText"></span>
+        </div>
+    </div>
+
+</body>
+</html>

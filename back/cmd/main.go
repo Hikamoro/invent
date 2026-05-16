@@ -33,6 +33,7 @@ func main() {
 
 	// mux.PathPrefix("/").Handler(http.FileServer(http.Dir("./front")))
 	mux.HandleFunc("/", home)
+	mux.HandleFunc("/goods", goods)
 	mux.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./front/"))))
 	log.Println("Server starting on http://localhost:8080")
 	log.Println("Frontend available at: http://localhost:8080/")
@@ -45,7 +46,12 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	Tmpl, _ := template.ParseFiles("./front/index.html")
+	Tmpl, _ := template.ParseFiles("./front/home/index.html")
+	Tmpl.Execute(w, nil)
+}
+
+func goods(w http.ResponseWriter, r *http.Request) {
+	Tmpl, _ := template.ParseFiles("./front/goods/goods.html")
 	Tmpl.Execute(w, nil)
 }
 

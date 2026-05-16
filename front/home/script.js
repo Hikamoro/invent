@@ -1,4 +1,3 @@
-// Базовые URL для API - автоматическое определение текущего хоста
 const API_BASE_URL = `${window.location.origin}`;
 
 // Элементы DOM
@@ -71,6 +70,11 @@ async function showCategoryDropdown() {
             categoryItem.addEventListener('click', () => {
                 showNotification(`Выбрана категория: ${category.name}`, 'success');
                 categoryDropdown.style.display = 'none';
+
+                const categoryData = { id: category.id, name: category.name };
+                sessionStorage.setItem('selectedCategory', JSON.stringify(categoryData));
+                window.location.href = '/goods';
+
             });
             categoryList.appendChild(categoryItem);
         });
